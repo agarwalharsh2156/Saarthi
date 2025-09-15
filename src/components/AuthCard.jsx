@@ -12,7 +12,7 @@ import { FormInput } from './FormInput'
  * - Overlay color: Update gray gradient classes for overlay styling
  */
 
-export const AuthCard = () => {
+export const AuthCard = (props) => {
   const [isSignup, setIsSignup] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [formData, setFormData] = useState({
@@ -37,11 +37,10 @@ export const AuthCard = () => {
     })
   }
 
+  // inside AuthCard.jsx handleSubmit
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    // Show success message
-    alert(`${isSignup ? 'Signup' : 'Login'} successful! Check console for data.`)
+    props?.onSuccess?.()
   }
 
   const panelVariants = {
