@@ -4,6 +4,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Login } from './Login'
 import { Auth } from './pages/Auth'
 import { ImageCard } from './ImageCard'
+import { Menu } from './pages/Menu'
+import { Scene } from './pages/Scene' 
 
 // Character-by-character animation component
 const AnimatedText = ({ text, className, delay = 0 }) => {
@@ -144,6 +146,9 @@ export const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/auth" element={<Auth />} />
+      <Route path="/menu" element={<Menu />} />
+      <Route path="/scene/:slug" element={<Scene />} />
+      {/* <Route path="*" element={<Navigate to="/menu" replace />} /> */}
     </Routes>
   )
 }
