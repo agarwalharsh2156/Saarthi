@@ -32,7 +32,7 @@ export const Scene = () => {
                         clearInterval(progressInterval);
                         return 100;
                     }
-                    return prev + 2;         // 2 % × 50 ticks = 100 % in 10 s
+                    return prev + 4;         // 2 % × 50 ticks = 100 % in 10 s
                 });
             }, 200);
 
