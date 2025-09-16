@@ -98,7 +98,7 @@ const LandingPage = () => {
         {/* Problem Statement */}
         <AnimatedText 
           text="We built this to help tourists experience places virtually before visiting in reality."
-          className="text-lg md:text-xl text-gray-500 mb-10 max-w-3xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-gray-300 font-medium mb-10 max-w-3xl mx-auto leading-relaxed"
           delay={1.0}
         />
 

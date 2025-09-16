@@ -45,9 +45,9 @@ export const ImageCard = ({ imageSrc, title, description, isDimmed = false, onHo
         animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
         transition={{ duration: 0.25 }}
       >
-        <div className="rounded-lg bg-gradient-to-t from-black/80 to-black/20 p-4">
-          <h4 className="text-gray-200 text-lg font-semibold mb-1">{title}</h4>
-          <p className="text-gray-400 text-sm leading-snug">{description}</p>
+        <div className="rounded-lg bg-gradient-to-t from-black/90 to-black/30 p-4 space-y-1">
+          <h4 className="text-xl font-bold text-gray-100 tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{title}</h4>
+          <p className="text-sm font-normal text-gray-300 leading-snug drop-shadow-[0_1px_1px_rgba(0,0,0,0.7)]">{description}</p>
         </div>
       </motion.div>
     </motion.div>
