@@ -13,15 +13,6 @@ export const TajMahalScene = () => {
                 vr-mode-ui="enabled: true"
             >
 
-
-                {/* <a-plane
-                    position="0 0 0"
-                    rotation="-90 0 0"
-                    width="200"
-                    height="200"
-                    color="#482546ff"
-                /> */}
-
                 <a-sky src="/3d-assets/background/horn-koppe_spring_4k.jpg" />
 
                 <a-entity
@@ -50,10 +41,10 @@ export const TajMahalScene = () => {
                 <a-entity 
                     id="rig" 
                     position="20 10 100"
-                    wasd-controls="acceleration: 50"
                 >
                     <a-camera
-                        
+                        id="camera-rig"
+                        wasd-controls="acceleration: 50"
                         look-controls="pointerLockEnabled: false"
                     />
                 </a-entity>
