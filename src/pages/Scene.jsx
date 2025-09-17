@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { TajMahalScene } from '../components/scenes/TajMahalScene'
 import { ChevronUp, ChevronDown, Gauge, Mountain } from 'lucide-react'
+import { AncientHoseScene } from '../components/scenes/AncientHouseScene'
+import { CharMinarScene } from '../components/scenes/CharMinarScene'
+import { BaaMisikyyScene } from '../components/scenes/BaaMiskiyyScene'
 
 export const Scene = () => {
     const { slug } = useParams()
@@ -32,7 +35,7 @@ export const Scene = () => {
                         clearInterval(progressInterval);
                         return 100;
                     }
-                    return prev + 4;         // 2 % × 50 ticks = 100 % in 10 s
+                    return prev + 2;         // 2 % × 50 ticks = 100 % in 10 s
                 });
             }, 200);
 
@@ -56,7 +59,7 @@ export const Scene = () => {
     const increaseSpeed = () => {
         const newSpeed = Math.min(speed + 50, 400) // Max speed: 400
         setSpeed(newSpeed)
-        const camera = document.querySelector('#rig')
+        const camera = document.querySelector('#camera-rig')
         if (camera) {
             camera.setAttribute('wasd-controls', `acceleration: ${newSpeed}`)
         }
@@ -65,7 +68,7 @@ export const Scene = () => {
     const decreaseSpeed = () => {
         const newSpeed = Math.max(speed - 50, 50) // Min speed: 50
         setSpeed(newSpeed)
-        const camera = document.querySelector('#rig')
+        const camera = document.querySelector('#camera-rig')
         if (camera) {
             camera.setAttribute('wasd-controls', `acceleration: ${newSpeed}`)
         }
@@ -107,7 +110,12 @@ export const Scene = () => {
         switch (slug) {
             case 'taj-mahal':
                 return <TajMahalScene />
-            // Add other scenes here later
+            case 'ancient-stone-house':
+                return <AncientHoseScene/>
+            case 'charminar':
+                return <CharMinarScene/>
+            case 'baa_miskiyy_maldives':
+                return <BaaMisikyyScene/>
             default:
                 return <div className="h-screen flex items-center justify-center text-white">Scene not found: {slug}</div>
         }

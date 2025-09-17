@@ -11,22 +11,22 @@ const SITES = [
         summary: 'Ivory‑white marble mausoleum in Agra; a UNESCO icon on the Yamuna’s right bank.'
     },
     {
-        slug: 'hawa-mahal',
-        name: 'Hawa Mahal',
-        image: '/images/hawamahal.jpg',
-        summary: 'Jaipur’s “Palace of Winds,” a five‑storey pink sandstone facade with 953 jharokhas.'
+        slug: 'ancient-stone-house',
+        name: 'Ancient Stone Hose',
+        image: '/images/ancient-house.png',
+        summary: 'It was found in almost all the major cities throughout the Roman territories.'
     },
     {
-        slug: 'golden-temple',
-        name: 'Golden Temple',
-        image: '/images/Golden temple.jpg',
-        summary: 'Sri Harmandir Sahib in Amritsar; holiest Gurdwara, famed for its gilded sanctum and sarovar.'
+        slug: 'charminar',
+        name: 'Charminar',
+        image: '/images/charminar.png',
+        summary: 'The Charminar is a monument located in Hyderabad, Telangana, India. Constructed in 1591, the landmark is a symbol of Hyderabad.'
     },
     {
-        slug: 'kochi',
-        name: 'Kochi',
-        image: '/images/kochi.jpg',
-        summary: 'Historic port city in Kerala, known for Chinese fishing nets, Fort Kochi, and blend of cultures.'
+        slug: 'baa_miskiyy_maldives',
+        name: 'Baa Miskiyy',
+        image: '/images/baa-miskiyy.png',
+        summary: 'Baa Miskiyy means Old Mosque and this scene represents a Baa Miskiyy in Maldives.'
     }
 ]
 
