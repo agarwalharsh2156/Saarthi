@@ -5,7 +5,9 @@ import { Login } from './Login'
 import { Auth } from './pages/Auth'
 import { ImageCard } from './ImageCard'
 import { Menu } from './pages/Menu'
-import { Scene } from './pages/Scene' 
+import { Scene } from './pages/Scene'
+import { Dashboard } from './pages/Dashboard'
+import { PrivateRoute } from './components/PrivateRoute' 
 
 // Character-by-character animation component
 const AnimatedText = ({ text, className, delay = 0 }) => {
@@ -143,11 +145,28 @@ const LandingPage = () => {
 export const App = () => {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/auth" element={<Auth />} />
-      <Route path="/menu" element={<Menu />} />
-      <Route path="/scene/:slug" element={<Scene />} />
+      
+      {/* Protected Routes */}
+      <Route path="/dashboard" element={
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      } />
+      <Route path="/menu" element={
+        <PrivateRoute>
+          <Menu />
+        </PrivateRoute>
+      } />
+      <Route path="/scene/:slug" element={
+        <PrivateRoute>
+          <Scene />
+        </PrivateRoute>
+      } />
+      
       {/* <Route path="*" element={<Navigate to="/menu" replace />} /> */}
     </Routes>
   )

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { FormInput } from './FormInput'
+import { useAuth } from '../context/AuthContext'
 
 /**
  * AuthCard Component - Animated Login/Signup UI with sliding overlay
@@ -15,11 +17,16 @@ import { FormInput } from './FormInput'
 export const AuthCard = (props) => {
   const [isSignup, setIsSignup] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: ''
   })
+  
+  const { signup, login } = useAuth()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (isAnimating) {
@@ -37,10 +44,24 @@ export const AuthCard = (props) => {
     })
   }
 
-  // inside AuthCard.jsx handleSubmit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    props?.onSuccess?.()
+    setError('')
+    setLoading(true)
+    
+    try {
+      if (isSignup) {
+        await signup(formData.email, formData.password)
+        navigate('/menu')
+      } else {
+        await login(formData.email, formData.password)
+        navigate('/menu')
+      }
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const panelVariants = {
@@ -140,10 +161,16 @@ export const AuthCard = (props) => {
               />
               <button
                 type="submit"
-                className="w-full bg-cta-bg text-cta-text font-bold py-3 px-6 rounded-lg hover:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-card"
+                disabled={loading}
+                className="w-full bg-cta-bg text-cta-text font-bold py-3 px-6 rounded-lg hover:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-card disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Login
+                {loading ? 'Signing in...' : 'Login'}
               </button>
+              {error && (
+                <div className="mt-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg">
+                  <p className="text-red-300 text-sm">{error}</p>
+                </div>
+              )}
             </form>
           </div>
         </motion.div>
@@ -187,10 +214,16 @@ export const AuthCard = (props) => {
               />
               <button
                 type="submit"
-                className="w-full bg-cta-bg text-cta-text font-bold py-3 px-6 rounded-lg hover:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-card mb-6"
+                disabled={loading}
+                className="w-full bg-cta-bg text-cta-text font-bold py-3 px-6 rounded-lg hover:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-card disabled:opacity-50 disabled:cursor-not-allowed mb-6"
               >
-                Sign Up
+                {loading ? 'Creating account...' : 'Sign Up'}
               </button>
+              {error && (
+                <div className="mb-6 p-3 bg-red-500/20 border border-red-500/30 rounded-lg">
+                  <p className="text-red-300 text-sm">{error}</p>
+                </div>
+              )}
               
               {/* Social Login Placeholders */}
               <div className="text-center">
