@@ -1,5 +1,4 @@
 // src/components/scenes/TajMahalScene.jsx
-import React, { useEffect } from 'react'
 import 'aframe'
 
 
@@ -30,12 +29,12 @@ export const TajMahalScene = () => {
                 />
 
                 {/* Lighting */}
-                {/* <a-light type="ambient" color="#ffffffff" intensity="0.8" /> */}
-                <a-light type="directional" position="0 30 50" intensity="2.5" />
+                <a-light type="ambient" color="#ffffffff" intensity="4" />
+                {/* <a-light type="directional" position="0 30 50" intensity="2.5" />
                 <a-light type="directional" position="0 30 -50" intensity="2.5" />
                 <a-light type="directional" position="-50 30 -25" intensity="2.5" />
                 <a-light type="directional" position="50 30 -25" intensity="2.5" />
-                
+                 */}
 
                 {/* Camera */}
                 <a-entity 
