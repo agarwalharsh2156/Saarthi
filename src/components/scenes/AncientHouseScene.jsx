@@ -1,5 +1,5 @@
 // src/components/scenes/TajMahalScene.jsx
-import React, { useEffect } from 'react'
+
 import 'aframe'
 
 
@@ -17,9 +17,10 @@ export const AncientHoseScene = () => {
 
                 <a-entity
                     id="ground-entity"
-                    gltf-model="/3d-assets/models/floor/seamless__floor_tiled_texture_iv.glb"
-                    position="0 0 0"
-                    scale="80 80 80"
+                    gltf-model="/3d-assets/models/floor/cobblestone_ground_-_highpoly.glb"
+                    position="0 -30 0"
+                    scale="100 100 100"
+                    rotation="0 -90 0"
                 />
 
                 <a-entity
@@ -30,11 +31,11 @@ export const AncientHoseScene = () => {
                 />
 
                 {/* Lighting */}
-                {/* <a-light type="ambient" color="#ffffffff" intensity="0.8" /> */}
-                <a-light type="directional" position="0 30 50" intensity="2.5" />
+                <a-light type="ambient" color="#ffffffff" intensity="4" />
+                {/* <a-light type="directional" position="0 30 50" intensity="2.5" />
                 <a-light type="directional" position="0 30 -50" intensity="2.5" />
                 <a-light type="directional" position="-50 30 -25" intensity="2.5" />
-                <a-light type="directional" position="50 30 -25" intensity="2.5" />
+                <a-light type="directional" position="50 30 -25" intensity="2.5" /> */}
                 
 
                 {/* Camera */}

@@ -2,10 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { TajMahalScene } from '../components/scenes/TajMahalScene'
-import { ChevronUp, ChevronDown, Gauge, Mountain } from 'lucide-react'
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Gauge, Mountain } from 'lucide-react'
 import { AncientHoseScene } from '../components/scenes/AncientHouseScene'
 import { CharMinarScene } from '../components/scenes/CharMinarScene'
 import { BaaMisikyyScene } from '../components/scenes/BaaMiskiyyScene'
+import { AjantaElloraScene } from '../components/scenes/AjantaElloraScene'
+import { ArabicCityScene } from '../components/scenes/ArabicCityScene'
+import { EgyptianTempleScene } from '../components/scenes/EgyptianTempleScene'
+import { AztecTempleScene } from '../components/scenes/AztecTempleScene'
 
 export const Scene = () => {
     const { slug } = useParams()
@@ -15,6 +19,34 @@ export const Scene = () => {
     const [elevation, setElevation] = useState(10) // Current Y position\
     const [showLoadingScreen, setShowLoadingScreen] = useState(true)
     const [loadingProgress, setLoadingProgress] = useState(0)
+    const [pressedKeys, setPressedKeys] = useState({
+        KeyW: false,
+        KeyA: false,
+        KeyS: false,
+        KeyD: false
+    })
+
+
+    useEffect(() => {
+    const handleKeyDown = (e) => {
+        if (['KeyW', 'KeyA', 'KeyS', 'KeyD'].includes(e.code)) {
+            setPressedKeys(prev => ({ ...prev, [e.code]: true }))
+        }
+    }
+
+    const handleKeyUp = (e) => {
+        if (['KeyW', 'KeyA', 'KeyS', 'KeyD'].includes(e.code)) {
+            setPressedKeys(prev => ({ ...prev, [e.code]: false }))
+        }
+    }
+        document.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('keyup', handleKeyUp)
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+            document.removeEventListener('keyup', handleKeyUp)
+        }
+    }, [])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -28,18 +60,18 @@ export const Scene = () => {
 
     useEffect(() => {
         if (showLoadingScreen) {
-            // advance the progress bar every 200 ms
+            // advance the progress bar every 300 ms
             const progressInterval = setInterval(() => {
                 setLoadingProgress(prev => {
                     if (prev >= 100) {
                         clearInterval(progressInterval);
                         return 100;
                     }
-                    return prev + 2;         // 2 % × 50 ticks = 100 % in 10 s
+                    return prev + 2.5; // 2.5% × 40 ticks = 100% in 12 s
                 });
-            }, 200);
+            }, 300);
 
-            // hide the loading screen after 10 s
+            // hide the loading screen after 12 s
             const hideTimer = setTimeout(() => {
                 setShowLoadingScreen(false);
             }, 15000);
@@ -76,7 +108,7 @@ export const Scene = () => {
 
     // Elevation Control Function
     const elevateCamera = () => {
-        const newElevation = Math.min(elevation + 5, 50) // Max elevation: 50
+        const newElevation = Math.min(elevation + 5, 120) // Max elevation: 50
         setElevation(newElevation)
         const camera = document.querySelector('#rig')
         if (camera) {
@@ -114,8 +146,16 @@ export const Scene = () => {
                 return <AncientHoseScene/>
             case 'charminar':
                 return <CharMinarScene/>
-            case 'baa_miskiyy_maldives':
+            case 'baa-miskiyy-maldives':
                 return <BaaMisikyyScene/>
+            case 'ajanta-ellora':
+                return <AjantaElloraScene/>
+            case 'arabic-city':
+                return <ArabicCityScene/>
+            case 'egyptian-temple':
+                return <EgyptianTempleScene/>
+            case 'aztec-temple':
+                return <AztecTempleScene/>
             default:
                 return <div className="h-screen flex items-center justify-center text-white">Scene not found: {slug}</div>
         }
@@ -134,6 +174,9 @@ export const Scene = () => {
                             animation: 'gridMove 10s linear infinite'
                         }}></div>
                     </div>
+
+
+                    
 
                     {/* Main Loading Content */}
                     <div className="relative z-10 text-center max-w-md mx-auto px-6">
@@ -214,6 +257,89 @@ export const Scene = () => {
                 </svg>
                 Back to Menu
             </button>
+
+
+            {/* Directional Controls Indicator - Top Right */}
+            <div className="absolute top-6 right-6 z-50">
+                <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-xl p-3">
+                    <div className="text-center mb-1">
+                        <span className="text-white text-m">W-A-S-D</span>
+                    </div>
+
+                    {/* Arrow Layout */}
+                    <div className="grid grid-cols-3 gap-1 w-24">
+                        {/* Empty space */}
+                        <div></div>
+
+                        {/* W key - Up Arrow */}
+                        <button
+                            className={`
+          w-7 h-7 rounded border flex items-center justify-center transition-all duration-150
+          ${pressedKeys.KeyW
+                                    ? 'bg-accent text-black border-accent shadow-lg shadow-accent/50 scale-110'
+                                    : 'bg-white/10 text-white border-white/30 hover:bg-white/20'
+                                }
+        `}
+                            onMouseDown={() => setPressedKeys(prev => ({ ...prev, KeyW: true }))}
+                            onMouseUp={() => setPressedKeys(prev => ({ ...prev, KeyW: false }))}
+                            onMouseLeave={() => setPressedKeys(prev => ({ ...prev, KeyW: false }))}
+                        >
+                            <ChevronUp className="size-4" />
+                        </button>
+
+                        {/* Empty space */}
+                        <div></div>
+
+                        {/* A key - Left Arrow */}
+                        <button
+                            className={`
+          w-7 h-7 rounded border flex items-center justify-center transition-all duration-150
+          ${pressedKeys.KeyA
+                                    ? 'bg-accent text-black border-accent shadow-lg shadow-accent/50 scale-110'
+                                    : 'bg-white/10 text-white border-white/30 hover:bg-white/20'
+                                }
+        `}
+                            onMouseDown={() => setPressedKeys(prev => ({ ...prev, KeyA: true }))}
+                            onMouseUp={() => setPressedKeys(prev => ({ ...prev, KeyA: false }))}
+                            onMouseLeave={() => setPressedKeys(prev => ({ ...prev, KeyA: false }))}
+                        >
+                            <ChevronLeft className="size-4" />
+                        </button>
+
+                        {/* S key - Down Arrow */}
+                        <button
+                            className={`
+          w-7 h-7 rounded border flex items-center justify-center transition-all duration-150
+          ${pressedKeys.KeyS
+                                    ? 'bg-accent text-black border-accent shadow-lg shadow-accent/50 scale-110'
+                                    : 'bg-white/10 text-white border-white/30 hover:bg-white/20'
+                                }
+        `}
+                            onMouseDown={() => setPressedKeys(prev => ({ ...prev, KeyS: true }))}
+                            onMouseUp={() => setPressedKeys(prev => ({ ...prev, KeyS: false }))}
+                            onMouseLeave={() => setPressedKeys(prev => ({ ...prev, KeyS: false }))}
+                        >
+                            <ChevronDown className="size-4" />
+                        </button>
+
+                        {/* D key - Right Arrow */}
+                        <button
+                            className={`
+          w-7 h-7 rounded border flex items-center justify-center transition-all duration-150
+          ${pressedKeys.KeyD
+                                    ? 'bg-accent text-black border-accent shadow-lg shadow-accent/50 scale-110'
+                                    : 'bg-white/10 text-white border-white/30 hover:bg-white/20'
+                                }
+        `}
+                            onMouseDown={() => setPressedKeys(prev => ({ ...prev, KeyD: true }))}
+                            onMouseUp={() => setPressedKeys(prev => ({ ...prev, KeyD: false }))}
+                            onMouseLeave={() => setPressedKeys(prev => ({ ...prev, KeyD: false }))}
+                        >
+                            <ChevronRight className="size-4" />
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             {/* Gaming-Style Bottom Control Bar */}
             <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50">

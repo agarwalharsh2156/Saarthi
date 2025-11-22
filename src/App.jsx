@@ -85,7 +85,7 @@ const LandingPage = () => {
       >
         {/* Main Title */}
         <AnimatedText 
-          text="Saarthi - Virtual Tourist Guide"
+          text="Saarthi - Virtual Tourism"
           className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-200 mb-6"
           delay={0}
         />
@@ -125,18 +125,29 @@ const LandingPage = () => {
           ))}
         </motion.div>
         
-        {/* Experience It Button */}
-        <motion.button
-          onClick={handleExperienceClick}
-          className="bg-gray-200 text-black font-bold py-4 px-8 rounded-full text-lg md:text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.9, duration: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Experience It
-        </motion.button>
+        {/* Experience It Button (centered) */}
+        <div className="flex justify-center">
+          <motion.button
+            onClick={handleExperienceClick}
+            className="mx-auto bg-gray-200 text-black font-bold py-4 px-10 md:px-16 rounded-full text-lg md:text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg w-80 md:w-96 flex items-center justify-center gap-3"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.9, duration: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Experience It</span>
+            <svg
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </motion.button>
+        </div>
       </motion.div>
     </div>
   )
